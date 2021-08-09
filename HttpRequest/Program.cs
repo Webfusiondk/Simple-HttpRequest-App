@@ -11,10 +11,13 @@ namespace HttpRequest
         {
             try
             {
+                //Sending http request to website
                 HttpResponseMessage respons = await client.GetAsync(@"https://ugenr.dk/");
                 respons.EnsureSuccessStatusCode();
+                //Reading the response from website
                 string responsBody = await respons.Content.ReadAsStringAsync();
 
+                //Writing the response and replacing all HTML to text "Removed"
                 Console.WriteLine(Regex.Replace(responsBody, "<[^>]*>", "Removed"));
             }
             catch (HttpRequestException e)
